@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stack Exchange Election Nominee Information</title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    </head>
+    <body>
+        <div id="header">
+            <h1>Stack Exchange Moderator Candidate Statistics</h1>
+            <p id="intro">This page was put together by
+                <a href="http://meta.stackoverflow.com/users/150097/yi-jiang">Yi Jiang</a> and
+                <a href="http://meta.stackoverflow.com/users/150235/tim-stone">Tim Stone</a>.
+                The statistics are loaded dynamically from your browser - please be patient, the loading times are quite long.
+                The statistics are presented as is, it is up to you to decide what their relative importance is.
+                The Noteworthy Badges are those which we consider to be relevant to the role of a moderator.
+                If you have any comments, suggestions, or see any bugs, please post on the Stack Apps question
+                <a href="http://stackapps.com/questions/2049/stack-exchange-elections-statistics-page">
+                <strong>Stack Exchange Elections Statistics Page</strong></a>
+            </p>
+
+            <div id="option-menu">
+                <h3>Which badges to show</h3>
+                <ul id="badges">
+                </ul>
+
+                <form class="add-things"><label for="add-badge">Add badge</label>
+                    <input type="text" id="add-badge" />
+                </form>
+
+                <p id="badge-suggestions">
+                </p>
+            </div>
+
+            <div id="sites">
+                <h2>Choose your site</h2>
+                {{#unless current}}
+                <p>We're not aware of any active elections at the moment &ndash; the <a href="http://stackexchange.com/about/moderators">current moderators</a> must have things covered!</p>
+                {{/unless}}
+                <ul id="current-elections">
+                {{#each current}}
+                <li data-sitename="{{this.sitename}}">
+                    <a href="#{{this.sitename}}">
+                        <img src="{{this.icon}}" alt="{{this.name}} logo">{{this.name}}
+                    </a>
+                </li>
+                {{/each}}
+                </ul>
+
+                <h3>Completed Elections</h3>
+                <ul id="completed-elections">
+                {{#each finished}}
+                    <li data-sitename="{{this.sitename}}">
+                        <a href="#{{this.sitename}}">
+                            <img src="{{this.favicon}}" alt="{{this.name}} logo">{{this.name}}
+                        </a>
+                    </li>
+                {{/each}}
+                </ul>
+
+                <a id="option-menu-toggle" href="#">Change Noteworthy Badges</a>
+            </div>
+
+            <h2 id="loading">Please wait, Reticulating Splines</h2>
+            <ul id="loading-list">
+                <li id="load-init" class="load-elections">Loading elections page</li>
+                <li id="load-profile" class="load-elections">Loading user profile on main site</li>
+                <li id="load-tag">Loading user tag information</li>
+                <li id="load-badge">Loading badge information</li>
+                <li id="load-meta">Loading Meta profiles</li>
+                <li id="load-activity">Loading user activity</li>
+            </ul>
+        </div>
+
+        <div id="sort">
+            <form>
+                <h2>Sort by: </h2>
+                <label class="active"><input type="radio" value="random" name="sort" checked="checked"> Random</label><label>
+                <input type="radio" value="reputation" name="sort"> Reputation</label><label>
+                <input type="radio" value="join" name="sort"> Join date</label><label>
+                <input type="radio" value="nomination" name="sort"> Nomination time</label>
+            </form><form>
+                <h2>Show: </h2>
+                <label class="active"><input type="radio" value="blurb" name="show" checked="checked"> Nomination</label><label>
+                <input type="radio" value="profile" name="show"> Profile</label><label>
+                <input type="radio" value="none" name="show"> None</label>
+            </form>
+        </div>
+
+        <div id="site-detail">
+            <img src="" alt="" class="site-logo" />
+            <div class="site-right">
+                <h2 class="site-title"></h2>
+                <dl></dl>
+                <a href="#" id="sites-toggle">Change Site</a>
+                {{!<a href="#" id="add-user-toggle">Add more users</a>}}
+                <a href="#" class="election-link">Elections page on actual site</a>
+            </div>
+            <div id="election-result">
+                <h2>This election has ended. These are your new moderators!</h2>
+            </div>
+        </div>
+
+        <div id="add-user">
+            <form class="add-things">
+                <label for="user-search">Find user: </label>
+                <input type="text" id="user-search" />
+            </form>
+
+            <ul id="user-suggestions"></ul>
+
+            <h3>Selected users</h3>
+            <ul id="users"></ul>
+
+            <a id="add-user-confirm" href="#">Add users</a>
+        </div>
+
+        <ul id="candidates"></ul>
+
+        <div id="footer">
+            Created by <a href="http://meta.stackoverflow.com/users/150097/yi-jiang">Yi Jiang</a>.
+            Powered by the <a href="http://stackapps.com">Stack Exchange API</a>, <a href="http://www.jquery.com">jQuery</a>, <a href="http://nodejs.org/">node.js</a> and <a id="unicorn" href="#">unicorns</a>.
+        </div>
+
+        <script id="badge-template" type="text/x-handlebars-template">
+            <li>
+                <span class="badge-name \{{rank}}">\{{name}}</span> \{{description}} <a href="#" class="remove-badge" data-badge="\{{name}}">remove</a>
+            </li>
+        </script>
+        <script id="user-info-template" type="text/x-handlebars-template">
+            <li>
+                <img src="\{{profile_image}}" alt="\{{display_name}}'s profile picture">
+                <div class="infobox-right">
+                    <h4>\{{display_name}}</h4>
+                    <p class="infobox-stats">
+                        <span class="rep" title="\{{./reputation}}">\{{reputation reputation}}</span>
+                        <span class="badges">
+                            <span class="gold" title="\{{badge_counts.gold}}">\{{abbreviate badge_counts.gold}}</span>
+                            <span class="silver" title="\{{badge_counts.silver}}">\{{abbreviate badge_counts.silver}}</span>
+                            <span class="bronze" title="\{{badge_counts.bronze}}">\{{abbreviate badge_counts.bronze}}</span>
+                        </span>
+                    </p>
+                </div>
+            </li>
+        </script>
+        <script id="candidate-template" type="text/x-handlebars-template">
+            <li id="user-\{{user_id}}" data-association="\{{account_id}}" data-nomination-order="\{{nominated_order}}">
+                <div class="leftCol">
+                    <a href="\{{userpath user_id}}">
+                        <img class="gravatar" src="\{{profile_image}}" alt="\{{display_name}}'s profile image" />
+                    </a>
+                    \{{#if elected}}
+                    <p class="elected"><span class="diamond">&diams; </span>Elected</p>
+                    \{{/if}}
+                </div>
+                <div class="rightCol">
+                    <h2>\{{display_name}}</h2> <p class="personal">\{{{personal_data}}}</p>
+                    <p class="soInfo">
+                        <span class="rep" title="\{{./reputation}}">\{{reputation reputation}}</span>
+					<span class="badges">
+						<span class="gold">\{{badge_counts.gold}}</span>
+						<span class="silver">\{{badge_counts.silver}}</span>
+						<span class="bronze">\{{badge_counts.bronze}}</span>
+					</span>
+                        <span class="member_for" title="Member Since: \{{creation_string}}">member for: \{{member_for}}</span>
+                        \{{#if is_protem}}
+                        <span title="This user is a Pro Tem (Provisional) Moderator on this site" class="pro-tem">Pro Tem</span>
+                        \{{/if}}
+                    </p>
+                    <p class="tag_list"></p>
+
+                    <div class="nomination_detail blurb">\{{{user_text}}}</div>
+                    <div class="nomination_detail profile">\{{{about_me}}}</div>
+
+                    <div class="site_stats">
+                        <h3>Statistics</h3>
+                        <a href="\{{userpath user_id}}">View Profile</a>
+                        <p>Answers/Questions: <span class="stats" title="Ratio: \{{ratio_qa}}">\{{answer_count}} / \{{question_count}}</span></p>
+                        <p>Upvote/Downvote: <span class="stats" title="Ratio: \{{ratio_votes}}">\{{up_vote_count}} / \{{down_vote_count}}</span></p>
+                        <p><span title="Both of these are naive average, and does not take into account other means of rep changes like bounties">Avg. Rep.</span> Per Post:
+                            <span class="stats">\{{avg_post_rep}}</span></p>
+                        <p><span title="Both of these are naive average, and does not take into account other means of rep changes like bounties">Avg. Rep.</span> Per Day:
+                            <span class="stats">\{{avg_day_rep}}</span></p>
+                    </div>
+
+                    <div class="site_stats meta">
+                        <h3>Meta Participation</h3>
+                    </div>
+
+                    <div class="site_stats stackexchange">
+                        <h3>Network Participation</h3>
+                    </div>
+
+                    <div class="second_row">
+                        <div class="site_stats badge_list">
+                            <h3>Noteworthy Badges</h3>
+                            <ul></ul>
+                        </div>
+                        <div class="recent_activity">
+                            <h3>Recent Activity</h3>
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </script>
+        <script id="candidate-meta-template" type="text/x-handlebars-template">
+            <a href="\{{userpath user_id is_linked_meta}}">View Meta Profile</a>
+            \{{#unless is_linked_meta}}
+            <p>Reputation: <span class="stats" title="\{{./reputation}}">\{{reputation reputation}}</span></p>
+            \{{/unless}}
+            <p>Badges:
+			<span class="badges stats">
+				<span class="gold">\{{badge_counts.gold}}</span>
+				<span class="silver">\{{badge_counts.silver}}</span>
+				<span class="bronze">\{{badge_counts.bronze}}</span>
+			</span>
+            </p>
+            <p>Answers/Questions: <span class="stats" title="Ratio: \{{ratio_qa}}">\{{answer_count}} / \{{question_count}}</span></p>
+        </script>
+        <script id="candidate-network-template" type="text/x-handlebars-template">
+            <a href="http://stackexchange.com/users/\{{account_id}}">View Network Profile</a>
+            <p>Participated sites (<span title="Active defined as having more than 200 reps on that site">active</span>): <span class="stats">\{{total_sites}} (\{{active_sites}})</span></p>
+            <p><span title="Number excludes 100 rep association bonus">Total Reputation:</span> <span class="stats" title="\{{combined_rep}}">\{{reputation combined_rep}}</span></p>
+        </script>
+        <script id="candidate-tag-template" type="text/x-handlebars-template">
+            <a href="http://\{{site}}.com/search?q=user:\{{user_id}}+[\{{name_safe}}]" class="\{{badge_rank}}">\{{tag_name}}</a>
+        </script>
+        <script id="candidate-activity-template" type="text/x-handlebars-template">
+            <li>
+                <div class="timeline_event">
+                    <p class="action">\{{action}}</p>
+                    <p title="\{{creation_string}}">\{{time_ago}}</p>
+                </div>
+                <div class="timeline_detail">
+                    \{{#if awarded}}
+                    <h4><a href="\{{link}}">\{{title}} badge</a></h4>
+                    <p>\{{detail}}</p>
+                    \{{else}}
+                    <h4><a href="\{{link}}">\{{{title}}}</a></h4>
+                    <p>\{{markdown detail}}</p>
+                    \{{/if}}
+                </div>
+            </li>
+        </script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="/javascripts/es5-shim.js"></script>
+        <script src="/javascripts/meddle.js"></script>
+        <script src="/javascripts/handlebars.js"></script>
+        <script src="/javascripts/plugins.js"></script>
+        <script src="/javascripts/master.js"></script>
+        <script>
+            StackElections.init({
+                apikey: 'LYwuXpduJM2Kk9Twsc008w((',
+                selectedBadges: ['Deputy', 'Civic Duty', 'Convention', 'Strunk & White', 'Electorate', 'Sportsmanship', 'Pundit', 'Copy Editor', 'Outspoken'],
+                badges: {{{badges}}}
+            });
+        </script>
+    </body>
+</html>

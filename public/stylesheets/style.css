@@ -1,0 +1,983 @@
+/* http://meyerweb.com/eric/tools/css/reset/ v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+    outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+    text-decoration: none;
+}
+del {
+    text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*---------------------------*/
+
+body {
+    width: 800px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #444;
+}
+
+#header {
+    width: 625px;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    margin: 40px 0;
+    line-height: 1.2em;
+}
+
+a {
+    color: #E08608;
+}
+
+a:hover {
+    color: #FFA500;
+}
+
+sub, sup {
+    font-size: 0.7em;
+}
+
+sub {
+    vertical-align: sub;
+}
+
+sup {
+    vertical-align: super;
+}
+
+code {
+    padding: 1px 2px;
+    background: #efefef;
+    font-size: 0.9em;
+}
+
+pre code {
+    background: none;
+}
+
+#header p {
+    font-size: 13px;
+    line-height: 1.4em;
+    margin-bottom: 20px;
+}
+
+#option-menu {
+    display: none;
+    padding: 20px;
+    background: #efefef;
+    margin-bottom: 20px;
+}
+
+#option-menu h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#option-menu .instruction {
+    font-size: 0.9em;
+    font-style: italic;
+    font-weight: normal;
+}
+
+#option-menu .badge-name:before {
+    margin-right: 3px;
+}
+
+#badges {
+    margin-bottom: 20px;
+}
+
+#badges li {
+    margin: 12px 0;
+    position: relative;
+    padding-left: 130px;
+}
+
+#badges li .badge-name {
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+#badge-suggestions {
+    line-height: 1.8em;
+}
+
+#badges li .badge-name,
+#badge-suggestions .badge-name {
+    display: inline-block;
+    color: #fff;
+    font-size: 12px;
+    background-color: #333;
+    padding: 3px 7px 4px 7px;
+    margin: 3px 3px 0 0;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#badge-suggestions .badge-name {
+    cursor: pointer;
+    margin-right: 8px;
+    border: 0;
+    padding: 0 6px 1px;
+}
+
+#badge-suggestions .badge-name:hover {
+    background: #555;
+}
+
+.add-things {
+    padding: 5px 30px 7px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 -20px 10px;
+    background: #666;
+}
+
+.add-things label {
+    font-size: 12px;
+}
+
+.add-things input {
+    padding: 1px 4px;
+    margin-left: 3px;
+}
+
+#badges li a.remove-badge {
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/*
+   Site List
+*/
+
+#sites {
+    clear: both;
+    position: relative;
+}
+
+#sites h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+#sites h3 {
+    clear: both;
+    font-size: 16px;
+    margin: 10px 0 12px;
+}
+
+#sites li a {
+    width: 205px;
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: #444;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#sites li a:hover {
+    -moz-box-shadow: inset 0 0 24px #F9F9F9, 0 1px 1px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: #fff 0 0 0, inset 0 0 24px #F9F9F9, 0 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 24px #F9F9F9, 0 1px 1px rgba(0, 0, 0, 0.25);
+
+    border: 1px solid #ddd;
+
+    background: #efefef;
+    background: -moz-linear-gradient(top, #f9f9f9, #efefef);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#efefef));
+}
+
+#sites li img {
+    display: block;
+    width: 145px;
+    height: 145px;
+    margin: 0 auto 10px;
+}
+
+#sites #completed-elections li a {
+    width: 270px;
+    padding: 6px 0 7px 30px;
+    text-align: left;
+    margin: 0;
+
+    text-shadow: 0 1px 0 #fff;
+
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+#sites #completed-elections li a:hover {
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#sites #completed-elections li img {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: -3px;
+    margin: 0 10px 0 0;
+}
+
+#sites #option-menu-toggle {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+/*
+   Loading list
+*/
+
+#loading, #loading-list {
+    display: none;
+    clear: both;
+}
+
+#loading {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#loading-list li {
+    font-size: 14px;
+    font-weight: bold;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+#loading-list li:before {
+    display: inline-block;
+    width: 20px;
+    content: '\231B';
+}
+
+#loading-list li.loaded {
+    color: #80BC10;
+}
+
+#loading-list li.loaded:before {
+    content: '\2714';
+}
+
+#loading-list + h3 {
+    margin-top: 10px;
+}
+
+/*
+   Site detail area
+*/
+
+#site-detail {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: none;
+    padding-bottom: 10px;
+}
+
+#site-detail img.site-logo {
+    float: left;
+    width: 158px;
+    height: 158px;
+}
+
+#site-detail div.site-right {
+    float: right;
+    width: 600px;
+    margin-bottom: 25px;
+}
+
+#site-detail h2.site-title {
+    font-size: 22px;
+    margin: 20px 0;
+}
+
+#site-detail dl {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+
+    -moz-column-gap: 10px;
+    -webkit-column-gap: 10px;
+    column-gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+#site-detail dl dt {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+#site-detail dl dd {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 0;
+    margin-bottom: 8px;
+}
+
+#site-detail a {
+    float: right;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+/*
+   Election results div
+*/
+
+#election-result {
+    clear: both;
+    display: none;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 15px 20px 20px;
+
+    background: #efefef;
+    background: -moz-linear-gradient(center top , #FFFFFF, #EFEFEF 125%);
+
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 0 2px #FFFFFF inset, 0 0 2px #FFFFFF inset;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 0 2px #FFFFFF inset, 0 0 2px #FFFFFF inset;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 0 2px #FFFFFF inset, 0 0 2px #FFFFFF inset;
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+#election-result h2 {
+    font-size: 16px;
+    margin-bottom: 14px;
+}
+
+#election-result a {
+    float: none;
+}
+
+#election-result a:hover img {
+    -moz-box-shadow: 0 0 10px rgba(25, 189, 234, 0.4);
+    -webkit-box-shadow: 0 0 10px rgba(25, 189, 234, 0.4);
+    box-shadow: 0 0 10px rgba(25, 189, 234, 0.4);
+}
+
+/*
+   Adding users list
+*/
+
+#add-user {
+    display: none;
+    margin-left: 20px;
+    padding: 20px;
+    background: #efefef;
+}
+
+#add-user h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+#add-user li {
+    width: 165px;
+    padding: 5px 7px;
+    margin-right: 5px;
+    overflow: hidden;
+    float: left;
+}
+
+#add-user li:hover {
+    background: #666;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+#add-user li img {
+    width: 35px;
+    height:35px;
+    float: left;
+}
+
+#add-user li .infobox-right {
+    float: right;
+    width: 120px;
+    font-size: 11px;
+}
+
+#add-user li .infobox-right h4 {
+    font-size: 13px;
+    margin: 2px 0 3px;
+    white-space: pre;
+}
+
+#add-user li .infobox-right .rep {
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#user-suggestions, #add-user-confirm, #users {
+    overflow: hidden;
+    clear: both;
+}
+
+#user-suggestions {
+    overflow: hidden;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #999;
+    margin: 10px 0;
+}
+
+#add-user-confirm {
+    padding: 6px 11px 8px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #444;
+    text-decoration: none;
+    border: 1px solid #999;
+
+    background: #e3e3e3;
+    background: -moz-linear-gradient(center top , #F3F3F3, #D3D3D3);
+    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#d3d3d3));
+
+    margin-top: 6px;
+    display: inline-block;
+}
+
+#add-user-confirm:hover {
+    background: #f3f3f3;
+}
+
+#sort {
+    display: none;
+    padding: 0 10px;
+    background: #efefef;
+    position: fixed;
+    top: 0;
+    width: 760px;
+    margin-left: 20px;
+}
+
+#sort form {
+    float: left;
+    margin-right: 40px;
+    opacity: 0.3;
+}
+
+#sort h2 {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+#sort label {
+    padding: 4px 4px 6px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 1px;
+    font-size: 12px;
+}
+
+#sort label:hover,
+#sort label.active {
+    background-color: #FF8B07;
+    color: #fff;
+}
+
+#sort label input {
+    display: none;
+}
+
+#candidates li p.personal,
+#candidates li .rightCol > h2,
+#candidates .rightCol,
+#candidates img.gravatar {
+    float: left;
+}
+
+#candidates p.soInfo,
+#candidates li {
+    clear: both;
+}
+
+#candidates > li {
+    overflow: hidden;
+    padding: 30px 20px;
+}
+
+#candidates .pro-tem {
+    color: #fff;
+    background: #AF0E0E;
+    font-size: 9px;
+    text-transform: uppercase;
+    padding: 2px 4px 2px;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: 1px;
+    margin-left: 4px;
+    border: 0;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#candidates li img.gravatar {
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+
+    -moz-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 0 0 #fff, inset 0 0 8px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
+
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+    background: -moz-linear-gradient(top , #fff, #f3f3f3);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f3f3f3));
+}
+
+#candidates .rightCol {
+    width: 625px;
+    float: right;
+}
+
+#candidates .leftCol {
+    float: left;
+    width: 110px;
+}
+
+#candidates .leftCol .elected {
+    background: #777;
+    background: -moz-linear-gradient(center top , #888888, #555555);
+    clear: both;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px auto;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 65px;
+
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+#candidates .leftCol .elected .diamond {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 50px;
+}
+
+#candidates li h2 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+#candidates li h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+#candidates li p.personal {
+    color: #999;
+    margin: 5px 0 0 5px;
+    font-size: 13px;
+
+    white-space: nowrap;
+    max-width: 350px;
+}
+
+#candidates li p.soInfo {
+
+}
+
+#candidates .rep {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#candidates .badges {
+    color: #888;
+}
+
+.gold:before,
+.silver:before,
+.bronze:before {
+    content: '\25CF';
+    display: inline-block;
+    margin: 0 1px 0 0;
+}
+
+.gold:before {
+    color: #FFCC00;
+}
+
+.silver:before {
+    color: #C5C5C5;
+}
+
+.bronze:before {
+    color: #CC9966;
+}
+
+#candidates .member_for {
+    color: #999;
+    margin-left: 3px;
+}
+
+#candidates .tag_list {
+    font-size: 11px;
+    margin: 8px 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+#candidates .tag_list a {
+    display: inline-block;
+    background-color: #E0EAF1;
+    border-bottom: 1px solid #3E6D8E;
+    border-right: 1px solid #7F9FB6;
+    color: #3E6D8E;
+    margin: 0 6px 5px 0;
+    padding: 3px 5px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+#candidates .tag_list a:hover {
+    background-color: #3E6D8E;
+    border-bottom: 1px solid #37607D;
+    border-right: 1px solid #37607D;
+    color: #E0EAF1;
+}
+
+#candidates li .site_stats {
+    width: 184px;
+    margin-right: 22px;
+    float: left;
+}
+
+#candidates li .site_stats p {
+    margin-bottom: 6px;
+    color: #999;
+    font-size: 12px;
+}
+
+#candidates li .site_stats a {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+
+#candidates li .stats {
+    color: #444;
+    font-weight: bold;
+    float: right;
+    font-size: 13px;
+}
+
+#candidates li div.nomination_detail {
+    margin-bottom: 28px;
+}
+
+#candidates li div.nomination_detail p,
+#candidates li div.nomination_detail ul,
+#candidates li div.nomination_detail ol {
+    margin-bottom: 1em;
+    line-height: 1.5em;
+}
+
+#candidates li div.nomination_detail ul {
+    list-style: disc outside none;
+}
+
+#candidates li div.nomination_detail ol {
+    list-style: decimal outside none;
+}
+
+#candidates li div.nomination_detail li {
+    margin-left: 12px;
+}
+
+#candidates li div.nomination_detail ul p,
+#candidates li div.nomination_detail ol p {
+    margin: 0;
+}
+
+#candidates li div.nomination_detail blockquote {
+    padding: 5px 10px;
+    margin-bottom: 1em;
+    background: #efefef;
+}
+
+#candidates li div.nomination_detail blockquote p,
+#candidates li div.nomination_detail blockquote ul,
+#candidates li div.nomination_detail blockquote ol {
+    margin-bottom: 0;
+}
+
+#candidates li div.nomination_detail hr {
+    color: #999;
+    height: 1px;
+    margin-bottom: 10px;
+    border: 1px solid #999;
+}
+
+#candidates li div.nomination_detail h1 {
+    font-size: 20px;
+    margin: 0 0 1em 0;
+}
+
+#candidates li div.nomination_detail h2 {
+    font-size: 17px;
+}
+
+##candidates li div.nomination_detail h3 {
+    font-size: 15px;
+}
+
+#candidates li div.nomination_detail.profile {
+    display: none;
+}
+
+#candidates li div.nomination_detail [title] {
+    cursor: inherit;
+    border-bottom-width: 0;
+}
+
+#candidates .badge_list {
+
+}
+
+#candidates .badge_list ul li {
+    color: #CC0003;
+    font-weight: bold;
+    margin-bottom: 3px;
+    border-bottom: 0;
+}
+
+#candidates .badge_list ul li.badge_received {
+    color: #80BC10;
+}
+
+#candidates .badge_list ul li:before {
+    content: '\2716';
+    margin-right: 3px;
+    display: inline-block;
+}
+
+#candidates .badge_list ul li.badge_received:before {
+    content: '\2714';
+}
+
+#candidates li .second_row {
+    clear: both;
+    padding-top: 20px;
+}
+
+#candidates div.recent_activity {
+    float: right;
+    width: 419px;
+}
+
+#candidates div.recent_activity ul li {
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+#candidates div.recent_activity ul .timeline_event {
+    float: left;
+    width: 60px;
+    padding: 7px 5px;
+    background-color: #efefef;
+    color: #999;
+    font-size: 11px;
+
+    text-align: center;
+}
+
+#candidates div.recent_activity ul .timeline_event .action {
+    font-weight: bold;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+#candidates div.recent_activity div.timeline_detail {
+    float: right;
+    width: 340px;
+}
+
+#candidates div.recent_activity div.timeline_detail h4 {
+    line-height: 1.2em;
+    margin-bottom: 4px;
+}
+
+#candidates div.recent_activity div.timeline_detail p {
+    font-size: 12px;
+    line-height: 1.3em;
+}
+
+#candidates .primary {
+    width: 90px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 15px;
+    overflow: hidden;
+}
+
+#candidates .primary p {
+    margin-bottom: 6px;
+}
+
+#candidates .primary .score {
+    font-size: 36px;
+    font-weight: bold;
+    border-bottom: 0;
+}
+
+#candidates .primary .votes {
+    font-size: 16px;
+    font-weight: bold;
+    color: #777;
+}
+
+#candidates .primary .votes .upvote {
+    color: #80BC10;
+}
+
+#candidates .primary .votes .downvote {
+    color: #C11316;
+}
+
+#candidates .primary .primary-sub {
+    font-size: 11px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+#candidates .primary .top10 {
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+
+    -moz-box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.5), 0 1px 0 #000000;
+    -webkit-box-shadow: 0 1px 0 #000000, #fff 0 0 0 inset, inset 0 3px 4px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.5), 0 1px 0 #000000;
+
+    background: #999999;
+    background: -moz-linear-gradient(top, #999, #666);
+    background: -webkit-gradient(linear, left top, left bottom, from(#999), to(#666));
+
+    color: #FCE599;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+
+    margin: 10px auto;
+    padding-top: 10px;
+    width: 60px;
+    height: 55px;
+
+    border-bottom: 0;
+    display: none;
+}
+
+#candidates .primary .top10 .ten {
+    color: #F9C311;
+    font-size: 34px;
+    display: block;
+    letter-spacing: -2px;
+}
+
+#footer {
+    clear: both;
+    line-height: 1.4em;
+    margin: 20px 20px 0 155px;
+    padding: 12px 30px 20px 30px;
+    border-top: 1px solid #999;
+    text-align: center;
+}
+
+[title] {
+    cursor: help;
+    border-bottom: 1px dotted #ddd;
+}
