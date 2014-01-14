@@ -115,7 +115,7 @@
         </div>
 
         <ul id="candidates"></ul>
-        
+
         <p id="no-candidates">No one has braved the nomination process yet! Check back later.</p>
 
         <div id="footer">
@@ -148,14 +148,14 @@
             <li id="user-\{{user_id}}" data-association="\{{account_id}}" data-nomination-order="\{{nominated_order}}">
                 <div class="leftCol">
                     <a href="\{{userpath user_id}}">
-                        <img class="gravatar" src="\{{profile_image}}" alt="\{{display_name}}'s profile image" />
+                        <img class="gravatar" src="\{{profile_image}}" alt="\{{{display_name}}}'s profile image" />
                     </a>
                     \{{#if elected}}
                     <p class="elected"><span class="diamond">&diams; </span>Elected</p>
                     \{{/if}}
                 </div>
                 <div class="rightCol">
-                    <h2>\{{display_name}}</h2> <p class="personal">\{{{personal_data}}}</p>
+                    <h2>\{{{display_name}}}</h2> <p class="personal">\{{{personal_data}}}</p>
                     <p class="soInfo">
                         <span class="rep" title="\{{./reputation}}">\{{reputation reputation}}</span>
 					<span class="badges">
