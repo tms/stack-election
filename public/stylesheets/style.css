@@ -968,6 +968,20 @@ pre code {
     letter-spacing: -2px;
 }
 
+#no-candidates {
+    color: #636363;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5em 0.5em;
+    display: none;
+    font-size: 1.3em;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px dotted #ddd;
+    background: #F4F4F4;
+}
+
 #footer {
     clear: both;
     line-height: 1.4em;

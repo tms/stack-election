@@ -34,10 +34,10 @@ var Markdown = {
 
 var Loading = {
     _listEle: $('#loading-list li'),
-    complete: function(title) {
+    complete: function(title, force) {
         this._listEle.filter('#load-' + title).addClass('loaded');
 
-        if(!this._listEle.filter(':visible:not(.loaded)').length) {
+        if(force || !this._listEle.filter(':visible:not(.loaded)').length) {
             $('#loading-list, #loading').slideUp(400);
         }
     },
@@ -268,12 +268,14 @@ var StackElections = (function () {
 
         Loading.reset();
 
-        $('#election-result').slideUp();
+        $('#election-result, #no-candidates').slideUp();
         $('#site-detail, #option-menu').slideUp().find('dl').empty();
         $('.cleanup').remove();
 
         $.get('/' + Settings.siteName + '/election', function (election) {
-            Loading.complete('init');
+            var ids = Object.keys(election.candidates);
+
+            Loading.complete('init', !ids.length);
             Settings.phase = election.phase;
 
             var details = $('#site-detail');
@@ -305,19 +307,23 @@ var StackElections = (function () {
 
             details.slideDown();
 
-            Meddle.With(Settings.siteName).users(Object.keys(election.candidates)).filter('!*Mq.)f.7fClai1MW').get(function (candidates) {
-                Loading.complete('profile');
+            if (ids.length) {
+                Meddle.With(Settings.siteName).users(Object.keys(election.candidates)).filter('!*Mq.)f.7fClai1MW').get(function (candidates) {
+                    Loading.complete('profile');
 
-                candidates.forEach(function (candidate) {
-                    $.extend(candidate, election.candidates[candidate.user_id] || {});
+                    candidates.forEach(function (candidate) {
+                        $.extend(candidate, election.candidates[candidate.user_id] || {});
 
-                    if (/^http:\/\/www.gravatar.com\//.test(candidate.profile_image)) {
-                        candidate.profile_image += '&s=90';
-                    }
+                        if (/^http:\/\/www.gravatar.com\//.test(candidate.profile_image)) {
+                            candidate.profile_image += '&s=90';
+                        }
+                    });
+
+                    stalkCandidates(candidates, election);
                 });
-
-                stalkCandidates(candidates, election);
-            });
+            } else {
+                $('#no-candidates').slideDown();
+            }
 
             var template = Handlebars.compile($('#user-info-template').html()),
                 suggestions = $('#user-suggestions');
