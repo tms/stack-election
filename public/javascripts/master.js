@@ -446,6 +446,7 @@ var StackElections = (function () {
 
                 rendered['user-' + accounts[account]].find('.stackexchange').append(
                     template({
+                        account_id: account,
                         combined_rep: tally.reputation,
                         active_sites: tally.active,
                         total_sites: tally.total
