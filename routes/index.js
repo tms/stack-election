@@ -72,7 +72,7 @@ IndexController.election = function (options) {
         storage = options.storage,
         xhr = options.xhr;
 
-    options.cacheDuration = 5 * 60 * 1000;
+    var cacheDuration = 5 * 60 * 1000;
 
     function scrapeElection(site) {
         var defer = deferred(),
@@ -160,7 +160,7 @@ IndexController.election = function (options) {
         if (election) {
             beforeElection =  election.update < site.elections[0];
             duringElection = !election.finished;
-            cacheExpired = election.update < Date.now() - options.cacheDuration;
+            cacheExpired = election.update < Date.now() - cacheDuration;
         }
 
         if (!election || beforeElection || (duringElection && cacheExpired)) {
@@ -186,7 +186,7 @@ IndexController.candidateTags = function (options) {
         storage = options.storage,
         meddle = options.meddle;
 
-    options.cacheDuration = 12 * 60 * 60 * 1000;
+    var cacheDuration = 12 * 60 * 60 * 1000;
 
     function fetchBadgeAndTagData(site, candidate) {
         var defer = deferred();
@@ -234,7 +234,7 @@ IndexController.candidateTags = function (options) {
             return;
         }
 
-        var cacheExpired = candidate && candidate.update < Date.now() - options.cacheDuration;
+        var cacheExpired = candidate && candidate.update < Date.now() - cacheDuration;
 
         if (!candidate || cacheExpired) {
             if (!pending[req.params.site + '-' + req.params.id]) {
