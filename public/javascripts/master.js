@@ -454,15 +454,20 @@ var StackElections = (function () {
                 );
             });
 
+            /*** No longer applicable to stackoverflow.  Maybe future site? (Meta SE gets a meta? :D )
             if (Settings.siteName === 'stackoverflow') {
                 stalkMetaCandidates(metaUsers, false);
             }
+            */
         });
 
+        /*** No longer applicable to stackoverflow.  Maybe future site? (Meta SE gets a meta? :D )
         // For every other site, do meta polling here
         if (Settings.siteName !== 'stackoverflow') {
             stalkMetaCandidates(users, true);
         }
+        */
+        stalkMetaCandidates(users, true);
 
         Meddle.With(Settings.siteName).users(users).badges().pagesize(100).all().sort('type').max('named').filter('3gY1MumGZ6PD').get(function (badges) {
             var lists = $('.badge_list ul:empty');
