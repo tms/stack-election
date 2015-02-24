@@ -281,6 +281,10 @@ var StackElections = (function () {
             var details = $('#site-detail');
 
             election.stats.forEach(function (stats) {
+                if (election.finished && stats.title && stats.title.indexOf('Z') == stats.title.length - 1) {
+                    stats.value = Date.parseTimestamp(stats.title).toRelativeTimeMini();
+                }
+
                 this.append($('<dt>', { text: stats.label }));
                 this.append($('<dd>', { text: stats.value, title: stats.title }));
             }, details.find('dl'));
@@ -667,3 +671,75 @@ $('#unicorn').toggle(function(){
         return v.replace('unicornify.appspot.com', 'www.gravatar.com');
     });
 });
+
+Date.parseTimestamp = (function () {
+    var implementation = function (timestamp) {
+        return new Date(timestamp);
+    };
+
+    try {
+        implementation('2011-01-01 12:00:00Z');
+    } catch (ex) {
+        implementation = function (timestamp) {
+            var bits = timestamp.split(/[-: Z]/);
+
+            // We only care about local and UTC, so assume non-local is always UTC
+            if (typeof bits[7] === 'undefined') {
+                return new Date(
+                    parseInt(bits[0], 10),
+                    parseInt(bits[1], 10),
+                    parseInt(bits[2], 10),
+                    parseInt(bits[3], 10),
+                    parseInt(bits[4], 10),
+                    parseInt(bits[5], 10)
+                );
+            } else {
+                return new Date(Date.UTC(
+                    parseInt(bits[0], 10),
+                    parseInt(bits[1], 10),
+                    parseInt(bits[2], 10),
+                    parseInt(bits[3], 10),
+                    parseInt(bits[4], 10),
+                    parseInt(bits[5], 10)
+                ));
+            }
+        }
+    }
+
+    return implementation;
+})();
+
+Date.prototype.toRelativeTimeMini = (function () {
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    return function () {
+        var delta = (Date.now() - this) / 1000,
+            rendered = "",
+            minute = 60, hour = 60 * minute, day = 24 * hour,
+            minutes = this.getUTCMinutes();
+
+        if (delta < 5) {
+            rendered = 'just now';
+        } else if (delta < minute) {
+            rendered = Math.round(delta) + 's ago';
+        } else if (delta < hour) {
+            rendered = Math.round(delta / minute) + 'm ago';
+        } else if (delta < day) {
+            rendered = Math.round(delta / hour) + 'h ago';
+        } else {
+            delta = Math.round(delta / day);
+
+            if (delta <= 2) {
+                rendered = delta + 'd ago';
+            } else {
+                var year = delta > 330 ?  " '" + (this.getUTCFullYear() % 100) : '';
+
+                rendered = months[this.getUTCMonth()]  + ' ' + this.getUTCDate() + year
+                    + ' at '
+                    + this.getUTCHours()  + ':'  + (minutes < 10 ? '0' : '') + minutes;
+            }
+        }
+
+        return rendered;
+    };
+})();
