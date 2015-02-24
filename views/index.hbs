@@ -40,7 +40,7 @@
                 {{#each current}}
                 <li data-sitename="{{this.sitename}}">
                     <a href="#{{this.sitename}}">
-                        <img src="{{this.icon}}" alt="{{this.name}} logo">{{this.name}}
+                        <img src="{{this.icon}}" alt="{{{this.name}}} logo">{{{this.name}}}
                     </a>
                 </li>
                 {{/each}}
@@ -51,7 +51,7 @@
                 {{#each finished}}
                     <li data-sitename="{{this.sitename}}">
                         <a href="#{{this.sitename}}">
-                            <img src="{{this.favicon}}" alt="{{this.name}} logo">{{this.name}}
+                            <img src="{{this.favicon}}" alt="{{{this.name}}} logo">{{{this.name}}}
                         </a>
                     </li>
                 {{/each}}
