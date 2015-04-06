@@ -244,7 +244,7 @@ var StackElections = (function () {
 
     function initPreload() {
         // Check for a pre-selected site
-        var selected = window.location.hash.replace('#', '');
+        var selected = window.location.hash.replace(/[^a-z\.]+/, '');
 
         if (selected && (selected = $('li[data-sitename="' + selected + '"]')).length) {
             $('#sites').hide();
