@@ -207,10 +207,7 @@
             </li>
         </script>
         <script id="candidate-meta-template" type="text/x-handlebars-template">
-            <a href="\{{userpath user_id is_linked_meta}}">View Meta Profile</a>
-            \{{#unless is_linked_meta}}
-            <p>Reputation: <span class="stats" title="\{{./reputation}}">\{{reputation reputation}}</span></p>
-            \{{/unless}}
+            <a href="\{{userpath user_id}}">View Meta Profile</a>
             <p>Badges:
                 <span class="badges stats">
                     <span class="gold">\{{badge_counts.gold}}</span>
