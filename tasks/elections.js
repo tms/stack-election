@@ -14,7 +14,10 @@ exports.update = function update(callback) {
             entries.forEach(function (entry) {
                 var name = entry.link.match(/^(http:\/\/[^\/]+)\//)[1].replace('meta.', '');
 
-                if (entry.author.name === 'Community' && entry.title.indexOf('Moderator Election') !== -1) {
+                if (entry.author.name === 'Community' && (
+                    entry.title.indexOf('Moderator Election') !== -1 ||
+                    entry.title.indexOf('Eleição Para Moderadores') !== -1
+                )) {
                     var sites = storage.getItem('sites'),
                         site = sites[name];
 

@@ -93,7 +93,8 @@ IndexController.election = function (options) {
 
                     election.update = Date.now();
                     election.title = $('h1:first').text().trim();
-                    election.finished = status.indexOf('election ended') !== -1;
+                    election.finished = status.indexOf('election ended') !== -1
+                        || status.indexOf('eleição encerrou') !== -1;
                     election.phase = election.finished ? 'completed' : status.split(' ')[0].toLowerCase();
                     election.stats = [];
 
