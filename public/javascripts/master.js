@@ -674,11 +674,11 @@ $('#unicorn').toggle(function(){
 
 Date.parseTimestamp = (function () {
     var implementation = function (timestamp) {
-        return new Date(timestamp);
+        return new Date(timestamp.replace(' ', 'T'));
     };
 
     try {
-        implementation('2011-01-01 12:00:00Z');
+        implementation('2011-01-01T12:00:00Z');
     } catch (ex) {
         implementation = function (timestamp) {
             var bits = timestamp.split(/[-: Z]/);
