@@ -94,7 +94,7 @@ IndexController.election = function (options) {
                     election.update = Date.now();
                     election.title = $('h1:first').text().trim();
                     election.finished = status.indexOf('election ended') !== -1
-                        || status.indexOf('eleição encerrou') !== -1;
+                        || status.indexOf('eleição encerrou') !== -1 ? Date.now() : false;
                     election.phase = election.finished ? 'completed' : status.split(' ')[0].toLowerCase();
                     election.stats = [];
 
@@ -156,15 +156,16 @@ IndexController.election = function (options) {
             return;
         }
 
-        var beforeElection, duringElection, cacheExpired;
+        var beforeElection, duringElection, cacheExpired, withinGracePeriod;
 
         if (election) {
             beforeElection =  election.update < site.elections[0];
             duringElection = !election.finished;
             cacheExpired = election.update < Date.now() - cacheDuration;
+            withinGracePeriod = election.finished && (election.finished > Date.now() - 5 * 60 * 60 * 1000)
         }
 
-        if (!election || beforeElection || (duringElection && cacheExpired)) {
+        if (!election || beforeElection || (duringElection && cacheExpired) || (withinGracePeriod && cacheExpired)) {
             if (!pending[req.params.site]) {
                 pending[req.params.site] = scrapeElection(req.params.site);
                 pending[req.params.site].done(function (election) {
