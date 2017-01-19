@@ -473,7 +473,7 @@ var StackElections = (function () {
         */
         stalkMetaCandidates(users, true);
 
-        Meddle.With(Settings.siteName).users(users).badges().pagesize(100).all().sort('type').max('named').filter('3gY1MumGZ6PD').get(function (badges) {
+        Meddle.With(Settings.siteName).users(users).badges().all().sort('type').max('named').filter('3gY1MumGZ6PD').get(function (badges) {
             var lists = $('.badge_list ul:empty');
 
             StackElections.options.selectedBadges.forEach(function (badge) {
