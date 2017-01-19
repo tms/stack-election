@@ -2,7 +2,7 @@ var storage,
     meddle;
 
 exports.update = function update(callback) {
-    meddle.With('stackoverflow').badges().filter('9e8ut8nybftG').sort('type').max('named').pagesize(100).all().get(function (badges) {
+    meddle.With('stackoverflow').badges().filter('9e8ut8nybftG').sort('type').max('named').all().get(function (badges) {
         badges && storage.setItem('badges', badges);
 
         if (callback) {
