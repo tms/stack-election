@@ -481,7 +481,7 @@ var StackElections = (function () {
 
                 $('<li>', {
                     text: badge,
-                    title: info.rank + ': ' + info.description
+                    title: info && info.rank + ': ' + info.description
                 }).appendTo(lists);
             });
 
