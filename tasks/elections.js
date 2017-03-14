@@ -12,7 +12,9 @@ exports.update = function update(callback) {
             storage.setItem('rss-latest', latest);
 
             entries.forEach(function (entry) {
-                var name = entry.link.match(/^(http:\/\/[^\/]+)\//)[1].replace('meta.', '');
+                var name = entry.link.match(/^(https?:\/\/[^\/]+)\//)[1]
+                    .replace('meta.', '')
+                    .replace('https://', 'http://');
 
                 if (entry.author.name === 'Community' && (
                     entry.title.indexOf('Moderator Election') !== -1 ||

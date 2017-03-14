@@ -81,10 +81,10 @@ IndexController.election = function (options) {
         // Didn't know this route existed, which is helpful...unfortunately
         // it doesn't respect our query parameters, so we need to grab the
         // redirect location and then make a separate request manually.
-        req.open('head', 'http://' + site + '.com/election/latest');
+        req.open('head', 'https://' + site + '.com/election/latest');
         req.onload = function () {
             jsdom.env(
-                'http://' + site + '.com' + this.getResponseHeader('location') + '?tab=nomination',
+                'https://' + site + '.com' + this.getResponseHeader('location') + '?tab=nomination',
                 ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'],
                 function (errors, window) {
                     var $ = window.$,
