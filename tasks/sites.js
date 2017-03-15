@@ -8,14 +8,15 @@ exports.update = function update(callback) {
 
         sites && sites.forEach(function (site) {
             if (site.site_type === 'main_site') {
-                var existing = stored[site.site_url],
+                var url = site.site_url.replace('https:', 'http:'),
+                    existing = stored[url],
                     elections = existing ? existing.elections : [];
 
                 if (!existing
                         || existing.favicon != site.favicon_url
                         || existing.icon != site.icon_url
                         || existing.name != site.name) {
-                    stored[site.site_url] = {
+                    stored[url] = {
                         favicon: site.favicon_url,
                         icon: site.icon_url,
                         name: site.name,
