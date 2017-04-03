@@ -62,7 +62,7 @@ body {
 }
 
 #header {
-    width: 625px;
+    width: 675px;
     float: right;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -221,7 +221,7 @@ pre code {
 }
 
 #sites li a {
-    width: 205px;
+    width: 215px;
     padding-bottom: 30px;
     margin-bottom: 10px;
     float: left;
@@ -985,7 +985,6 @@ pre code {
 #footer {
     clear: both;
     line-height: 1.4em;
-    margin: 20px 20px 0 155px;
     padding: 12px 30px 20px 30px;
     border-top: 1px solid #999;
     text-align: center;
